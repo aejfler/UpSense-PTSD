@@ -1,0 +1,126 @@
+{% extends 'basic.html' %}
+{%load static%}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<main id="main">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url(/static/img/hero-carousel/11.png);">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+            <h2>{{post.title}}</h2>
+            <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>post details</li>
+            </ol>
+        </div>
+    </div>
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row">
+                <div class="col">
+                    <article class="blog-details">
+                        <div class="container">
+                            <h2 class="title">{{post.title}}</h2>
+                            {% if user == post.author %}
+                            <button class="btn" style="float: right"><a
+                                    href="{% url 'edit_post' post.slug %}">Edit</a></button>
+                            <button class="btn" style="float: right"><a
+                                    href="{% url 'delete_post' post.slug %}">Delete</a></button>
+                            {% endif %}
+                            <div class="meta-top">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i>by:
+                                        {{post.author}}
+                                    </li>
+                                    <li class="d-flex align-items-center"><i class="bi-book-half"></i>category:
+                                        {{post.category}}
+                                    </li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i>
+                                        <time>{{post.created}}</time>
+                                    </li>
+                                    <li style="float: right">
+                                        {% with comments.count as total_comments %}
+                                        {{total_comments}} comment{{total_comments|pluralize}}
+                                        {% endwith %}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="content" style="margin-top: 30px; margin-left: 20px">
+                                {{post.content}}
+                            </div>
+                        </div>
+
+                        <!--    COMMENT SECTION    -->
+                        <br/>
+                        <h4 class="title">Comments ... </h4>
+                        {%if not comments%}
+                        <div class="container">
+                            <h6 class="title">There is not comments yet!</h6>
+                        </div>
+                        {%else%}
+                        <div class="blog-details" style="margin-top: 30px;">
+                            <div class="container"> {% for comment in post.comments.all %}
+                                <div class="content">
+
+                                    <div class="meta-top">
+                                        <ul>
+                                            <li class="d-flex align-items-center"><i class="bi bi-person"></i>by:
+                                                {{comment.author}}
+                                            </li>
+                                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i>
+                                                <time>{{comment.date}}</time>
+                                            </li>
+                                        </ul>
+                                        {% if user == comment.author %}
+                                        <button class="btn" style="float: right"><a
+                                                href="{% url 'edit_comment' comment.pk %}">Edit</a></button>
+                                        <button class="btn" style="float: right"><a
+                                                href="{% url 'delete_comment' comment.pk %}">Delete</a></button>
+                                        {% endif %}
+                                    </div>
+                                    <div class="content" style="margin: 20px">
+                                        {{comment.content}}
+                                    </div>
+                                    <hr>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        {%endif%}
+
+
+                        <div class="blog-details" style="margin-top: 30px">
+                            <div class="container">
+                                <div class="content">
+                                    <div class="meta-top">
+                                        <div class="row">
+                                            <div class="col-lg 8 mx-auto">
+                                                <h4>Add Comment</h4>
+                                                <br>
+                                                <form method="POST" action="{% url 'post_details' post.slug %}">
+                                                    {%csrf_token%}
+                                                    <div class="form-group">
+                                                        {% crispy form %}
+                                                        <br>
+                                                        <button type="submit" class="btn"
+                                                                style="float: right; margin-top: 20px"><a href="#">Add
+                                                            comment</a>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock %}

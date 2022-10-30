@@ -1,0 +1,99 @@
+{%extends 'basic.html'%}
+
+{%load static%}
+{%block content%}
+
+<main id="main">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url(/static/img/hero-carousel/11.png);">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+            <h2>Community</h2>
+            <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>Posts</li>
+            </ol>
+        </div>
+    </div>
+
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <!-- SEARCH SECTION -->
+            <div class="row">
+                <div id="left">
+                    <h5 class="title" style="color: yellow"><a href="{% url 'create_post' %}">Create Post</a></h5>
+                </div>
+                <div id="right">
+                    <form action="" method="POST">
+                    {%csrf_token%}
+                    {{form}}
+                    <button type="submit" class="btn"> Search</button>
+                </form>
+                </div>
+
+
+
+
+
+                {%if tagged_posts%}
+
+                <article class="blog-details" style="margin: 30px">
+                    {%for t in tagged_posts%}
+                    <h2 class="title"><a href="{% url 'post_details' t.slug %}">{{t.title}}</a></h2>
+                    <div class="meta-top">
+                        <ul>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{t.author}}
+                            </li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i>
+                                <time>{{t.created}}</time>
+                            </li>
+
+                        </ul>
+                    </div>
+                    {%endfor%}
+                </article>
+                {%endif%}
+
+            </div>
+
+            <!--  POST SECTION  -->
+
+            <div class="row">
+                <div class="col">
+                    {%for post in posts%}
+                    <article class="blog-details">
+                        <h2 class="title"><a href="{% url 'post_details' post.slug %}">{{post.title}}</a></h2>
+                        <div class="meta-top">
+                            <ul>
+                                <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{post.author}}
+                                </li>
+                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i>
+                                    <time>{{post.created}}</time>
+                                </li>
+                                <li style="float: right">
+                                    {{comments}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="content" style="margin: 20px">
+                            {{post.content}}
+                        </div>
+
+
+                        <div class="meta-bottom" role="" style="margin: 20px">
+                            {%for tag in post.tags.all%}
+                            <i class="badge badge-pill badge-light">{{tag.name}}</i>
+                            {% endfor %}
+                        </div>
+                    </article>
+                    {%endfor%}
+                    <div style="float: right; position: page; bottom: 0; margin-top: 20px">
+                        {%include 'community/pagination.html' with page=posts%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+{%endblock%}

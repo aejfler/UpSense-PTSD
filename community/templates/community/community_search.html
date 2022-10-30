@@ -1,0 +1,16 @@
+<form method="POST" action="">
+    {%csrf_token%}
+    <label for="search">
+        <input type="search" id="search" name="search" placeholder="search">
+    </label>
+    <button type="submit" class="btn"> Search </button>
+</form>
+{%if %}
+{%for s in posts%}
+<ul>
+    <li>
+        {{s}}
+    </li>
+</ul>
+{%endfor%}
+{%endif%}

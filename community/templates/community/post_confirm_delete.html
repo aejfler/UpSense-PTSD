@@ -1,0 +1,36 @@
+{% extends 'basic.html' %}
+{%load static%}
+{% block content %}
+
+<main id="main">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url(/static/img/hero-carousel/11.png);">
+        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+            <h2>Delete confirmation</h2>
+            <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>delete</li>
+            </ol>
+        </div>
+    </div>
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row">
+                <div class="col">
+                    <article class="blog-details">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <h2 class="title">Are you sure you want to delete post: "{{ post.title }}"?</h2>
+                            {{ form }}
+                            <button class="btn btn-sm" type="submit" style="margin-top: 30px">Confirm</button>
+                            <button class="btn btn-sm" type="submit" style="margin-top: 30px">Cancel</button>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock %}
