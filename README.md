@@ -12,3 +12,4 @@ Project functionalities contain:
   *joining a community (forum/direct messages -> latest in progress)
 
 
+DEMO:
