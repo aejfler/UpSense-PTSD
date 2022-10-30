@@ -12,4 +12,7 @@ Project functionalities contain:
   *joining a community (forum/direct messages -> latest in progress)
 
 
-DEMO:https://github.com/aejfler/UpSense-PTSD/issues/1#issue-1429039640
+DEMO:
+
+https://user-images.githubusercontent.com/101977156/198904966-4acbc670-f151-4594-86fa-8a39f8cb988d.mp4
+
