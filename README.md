@@ -3,17 +3,17 @@
 <hr>
 
 Project functionalities contain:<br>
-<br>
-  *viewing articles<br>
-  *listening podcasts<br>
-  *creating notepads and notes<br>
-  *devising safety plans<br>
-  *creating emergency contact list<br>
-  *managing symptoms and keeping trck of user's mental state<br>
-  *tracking progress<br>
-  *joining a community (forum/chatrooms where users can connect with each other)<br>
-  *direct messages (feature in progress)<br>
-
+<ul>
+  <li>viewing articles</li><br>
+  <li>listening podcasts</li><br>
+  <li>creating notepads and notes</li><br>
+  <li>devising safety plans</li><br>
+  <li>creating emergency contact list</li><br>
+  <li>managing symptoms and keeping trck of user's mental state</li><br>
+  <li>tracking progress</li><br>
+  <li>joining a community (forum/chatrooms where users can connect with each other)</li><br>
+  <li>direct messages (feature in progress)</li><br>
+</ul>
 <hr>
 DEMO:
 
